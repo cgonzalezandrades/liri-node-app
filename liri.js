@@ -2,6 +2,7 @@ var twitterData = require('./keys.js');
 var spotifyData = require('spotify');
 var request = require('request');
 var inquirer = require('inquirer');
+var fs = require('fs');
 
 //var path = process.argv[2];
 
@@ -89,34 +90,46 @@ inquirer.prompt([
             request.get("http://www.omdbapi.com/?t=" + movie.movieName + "+&y=&plot=short&tomatoes=true&r=json", function (error, response, body) {
                 if (!error && response.statusCode == 200) {
 
-                    console.log("Movie Name:-------- "+JSON.parse(body)["Title"]+"\n");
-                    
-                    console.log("Movie Year: "+JSON.parse(body)["Year"]+"\n");
-                    
-                    console.log("Movie imdbRating: "+JSON.parse(body)["imdbRating"]+"\n");
-                    
-                    console.log("This movie was produce in: "+JSON.parse(body)["Country"]+"\n");
-                    
-                     console.log("Movie Language:  "+JSON.parse(body)["Language"] +"\n");
-                    
-                     console.log("Plot:  "+JSON.parse(body)["Plot"]+"\n");
-                    
-                    console.log("Actors:  "+JSON.parse(body)["Actors"]+"\n");
-                    
-                    console.log("Rotten Tomato Rating:  "+JSON.parse(body)["tomatoRating"]+"\n");
-                    
-                    console.log("Rotten Tomato URL:  "+JSON.parse(body)["tomatoURL"]+"\n");
+                    console.log("Movie Name:-------- " + JSON.parse(body)["Title"] + "\n");
+
+                    console.log("Movie Year: " + JSON.parse(body)["Year"] + "\n");
+
+                    console.log("Movie imdbRating: " + JSON.parse(body)["imdbRating"] + "\n");
+
+                    console.log("This movie was produce in: " + JSON.parse(body)["Country"] + "\n");
+
+                    console.log("Movie Language:  " + JSON.parse(body)["Language"] + "\n");
+
+                    console.log("Plot:  " + JSON.parse(body)["Plot"] + "\n");
+
+                    console.log("Actors:  " + JSON.parse(body)["Actors"] + "\n");
+
+                    console.log("Rotten Tomato Rating:  " + JSON.parse(body)["tomatoRating"] + "\n");
+
+                    console.log("Rotten Tomato URL:  " + JSON.parse(body)["tomatoURL"] + "\n");
 
 
-
-                
-                    //Actors in the movie.
-                    //Rotten Tomatoes Rating.
-                    //Rotten Tomatoes URL.
 
                 }
             })
         })
 
     }
+
+    if (argument.files === 'do-what-it-says') {
+
+        fs.readFile("random.txt", "utf8", function (error, data) {
+
+           
+            console.log(data);
+            
+            var dataArr = data.split(',');
+            
+            console.log(dataArr);
+
+        });
+
+    }
+
+
 })
